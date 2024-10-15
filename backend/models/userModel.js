@@ -1,0 +1,50 @@
+import mongoose from "mongoose";
+const userSchema=new mongoose.Schema({
+    username:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    password:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    bio:{
+        type:String,
+        default:""
+    },
+    gender:{
+        type:String,
+        default:""
+    },
+    profile:{
+        type:String,
+        default:""
+    },
+    followers:[
+        {
+          type:mongoose.Schema.Types.ObjectId,
+          ref:"user"
+        }
+    ],
+    following:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"user"
+        }
+    ],
+    post:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"post"
+        }
+    ]
+},{timestamps:true});
+const userModel=mongoose.model("user",userSchema);
+export default userModel
